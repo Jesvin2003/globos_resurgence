@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlatformController : MonoBehaviour
@@ -8,19 +7,15 @@ public class PlatformController : MonoBehaviour
     public float speed = 1.0f;
     public bool shouldMove = false;
     // Start is called before the first frame update
-    void Update()
+    public GameObject platformMove;
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (shouldMove)
+        if (other.tag == "Nimbus")
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition.position, speed * Time.deltaTime);
+            platformMove.GetComponent<Animator>().Play("platform1");
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
-
     }
-    public void StartMoving()
-    {
-        shouldMove = true;
-    }
-
-    // Update is called once per frame
 
 }
