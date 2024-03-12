@@ -10,7 +10,6 @@ public class platform2Trigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Button triggered by player");
             platform2.GetComponent<Animator>().Play("platform2");
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
         }

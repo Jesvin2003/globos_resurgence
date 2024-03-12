@@ -3,19 +3,23 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
-    public Transform targetPosition;
-    public float speed = 1.0f;
-    public bool shouldMove = false;
-    // Start is called before the first frame update
-    public GameObject platformMove;
+    public GameObject platform1; // Reference to the platform GameObject named "platform1"
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Nimbus")
+        if (other.CompareTag("Player"))
         {
-            platformMove.GetComponent<Animator>().Play("platform1");
-            this.gameObject.GetComponent<BoxCollider>().enabled = false;
+            Animator platformAnimator = platform1.GetComponent<Animator>();
+
+            if (platformAnimator != null)
+            {
+                platformAnimator.Play("platformAnimation1");
+                GetComponent<BoxCollider>().enabled = false; // You can use GetComponent directly if the script is attached to the button GameObject.
+            }
+            else
+            {
+                Debug.LogError("Animator component not found on platform1!");
+            }
         }
     }
-
 }
