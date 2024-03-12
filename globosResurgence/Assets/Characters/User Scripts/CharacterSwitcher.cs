@@ -1,18 +1,21 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSwitcher : MonoBehaviour
 {
+    //Starting Nimbus is Primary
     public GameObject primaryCharacter;
     public GameObject secondaryCharacter;
 
     private PlayerController playerController;
-    private PlayerController aiController;
+    private PlayerController aiController; 
     private CameraFollow cameraFollow;
 
     void Start()
     {
+        //this sets the target to be the primary character for camera follow
         playerController = primaryCharacter.GetComponent<PlayerController>();
         aiController = secondaryCharacter.GetComponent<PlayerController>();
         cameraFollow = Camera.main.GetComponent<CameraFollow>();
@@ -25,6 +28,7 @@ public class CharacterSwitcher : MonoBehaviour
 
     void Update()
     {
+        //when TAB is pressed characters are switched
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             SwitchCharacter();
@@ -33,21 +37,30 @@ public class CharacterSwitcher : MonoBehaviour
 
     void SwitchCharacter()
     {
-        playerController.enabled = !playerController.enabled;
-        aiController.enabled = !aiController.enabled;
-
+        // Reset velocity of the character being switched
         if (playerController.enabled)
         {
-            cameraFollow.UpdateFollowTarget(primaryCharacter.transform);
+            ResetCharacterVelocity(playerController);
+            cameraFollow.UpdateFollowTarget(secondaryCharacter.transform);
         }
         else
         {
-            cameraFollow.UpdateFollowTarget(secondaryCharacter.transform);
+            ResetCharacterVelocity(aiController);
+            cameraFollow.UpdateFollowTarget(primaryCharacter.transform);
         }
-        //swap characters (This is just for the menu in the GameObject CharacterSwitcher
-        /*GameObject temp = playerCharacter;
-        playerCharacter = aiCharacter;
-        aiCharacter = temp;*/
 
+        // Toggle character controllers
+        playerController.enabled = !playerController.enabled;
+        aiController.enabled = !aiController.enabled;
+    }
+
+    //this is to prevent sliding when switching
+    void ResetCharacterVelocity(PlayerController controller)
+    {
+        Rigidbody2D rb = controller.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 }
