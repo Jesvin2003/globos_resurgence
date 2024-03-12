@@ -4,75 +4,78 @@ using UnityEngine;
 using UnityEngine.SceneManagement; //NEW
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float BASE_SPEED = 5;
-    private Rigidbody2D rb;
-    float currentSpeed;
-    //NEW
-    [SerializeField] private float JUMP_FORCE = 5f;
-    //private bool isGrounded = false;
-    // Start is called before the first frame update
-    void Start()
+    //in unity editor
+    public Rigidbody2D rb;
+    public float speed = 20;
+    public float jumpforce = 10f;
+    public Transform groundChecker;
+    public float checkRadius;
+
+    private float inputX;
+    private float vertical;
+    private bool isGrounded;
+
+    private void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
-        currentSpeed = BASE_SPEED;
-        //DontDestroyOnLoad(this.gameObject); //NEW
-        //SceneManager.sceneLoaded += OnSceneLoaded; //NEW
-    }
-    //NEW(for spawn point). Use if ALSO using DontDestroyOnLoad. Otherwise, see relevant code in GameManager
-//void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-//{
-//GameObject spawner = GameObject.FindGameObjectWithTag("Spawn");
-//if (spawner)
-//{
-// this.transform.position = spawner.transform.position;
-//}
-//}
-//NEW attempt 1
-//public void SetSpeed(float newSpeed)
-//{
-// currentSpeed = newSpeed;
-//}
-//NEW attempt 2
-public IEnumerator SpeedChange(float newSpeed, float timeInSecs)
-    {
-        currentSpeed = newSpeed;
-        yield return new WaitForSeconds(timeInSecs);
-        currentSpeed = BASE_SPEED;
-    }
-    //NEW
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    // isGrounded = true;
-    //}
-    // Update is called once per frame
-    void Update()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 dir = new Vector3(horizontal, 0, 0);
-        //rb.velocity = dir * currentSpeed;
-        //NEW
-        rb.velocity = new Vector2((dir * currentSpeed).x, rb.velocity.y);
-        if (horizontal < 0)
-        {
-            this.transform.rotation = new Quaternion(0, -1, 0, 0);
-        }
-        else
-        {
-            this.transform.rotation = new Quaternion(0, 0, 0, 0);
-        }
-        //NEW
-        //jumping 1
+        //get inputs from keyboard
+        inputX = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+
+        //this is envision with the OnDrawGizmos funtion and can be envisioned in the scene view by manipulating radius in editor
+        isGrounded = Physics2D.OverlapCircle(groundChecker.position, checkRadius);
+
+        //this function flips player around when turning direction
+        Flip();
+
+        //JUMP
         if (vertical > 0 && Mathf.Approximately(rb.velocity.y, 0))
         {
-            rb.AddRelativeForce(new Vector2(0, JUMP_FORCE),
-            ForceMode2D.Impulse);
+            rb.AddRelativeForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
         }
-        //jumping 2 -- what is the problem?
-        //if (vertical > 0 && isGrounded)
-        //{
-        // isGrounded = false;
-        // rb.AddRelativeForce(new Vector2(0, JUMP_FORCE), ForceMode2D.Impulse);
-        //}
+    }
+
+    void Flip()
+    {
+        //if input 0 < x that means player is moving right so keep it 
+        if (inputX > 0)
+        {
+            if (transform.eulerAngles.y != 0)
+            {
+                transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            }
+        }
+        //if input 0 > x  that means the player is moving left, so rotate the GameObject 180 degrees on the y axis
+        else if (inputX < 0)
+        {
+            if (transform.eulerAngles.y != 180f)
+            {
+                transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            }
+        }
+
+
+    }
+
+    private void FixedUpdate()
+    {
+
+        rb.velocity = new Vector2(inputX * speed, rb.velocity.y);
+
+        //this stops the player from sliding when character is switched, removes momentum
+        if (inputX == 0)
+        {
+            //if no Input is detected the characters velocity is zero
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (groundChecker != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundChecker.position, checkRadius);
+        }
     }
 }
