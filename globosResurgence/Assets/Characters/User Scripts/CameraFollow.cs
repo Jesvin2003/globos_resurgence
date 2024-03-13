@@ -24,4 +24,11 @@ public class CameraFollow : MonoBehaviour
     {
         target = newTarget;
     }
+    /*this was added due to ThrowController.cs
+     *I saw the updated target for my camera was working depending on my CharacterSwitcher
+     *So i grabbed the changing target in order to check if the current player is atmos */
+    public Transform CurrentTarget()
+    {
+        return target;
+    }
 }

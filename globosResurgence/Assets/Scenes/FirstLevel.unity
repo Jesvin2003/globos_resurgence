@@ -6416,6 +6416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 290771008}
   - component: {fileID: 290771007}
+  - component: {fileID: 290771009}
   m_Layer: 0
   m_Name: CaracterSwitcher
   m_TagString: Untagged
@@ -6452,6 +6453,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &290771009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290771006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7c319758487a941b03c6e7b90d8232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwPoint: {fileID: 743775760}
+  atmos: {fileID: 986484912}
+  nimbus: {fileID: 136282648}
+  throwForce: 10
+  maxForce: 15
+  minForce: 5
+  throwAngle: 45
 --- !u!1 &295266476
 GameObject:
   m_ObjectHideFlags: 0
@@ -19759,9 +19779,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: f9973df9b5d1be1408f9949492239787, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1922918299}
-    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: f9973df9b5d1be1408f9949492239787, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1922918302}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: f9973df9b5d1be1408f9949492239787, type: 3}
       insertIndex: -1
       addedObject: {fileID: 717475477}
@@ -42603,22 +42620,6 @@ MonoBehaviour:
   jumpforce: 7
   groundChecker: {fileID: 726489743}
   checkRadius: 0.38
---- !u!114 &1922918302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986484912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a7c319758487a941b03c6e7b90d8232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwPoint: {fileID: 743775760}
-  nimbus: {fileID: 136282648}
-  throwForce: 10
-  throwAngle: 45
 --- !u!61 &1922918303
 BoxCollider2D:
   m_ObjectHideFlags: 0
