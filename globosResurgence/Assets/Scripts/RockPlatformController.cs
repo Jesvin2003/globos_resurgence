@@ -6,6 +6,7 @@ public class RockPlatformController : MonoBehaviour
     public float riseSpeed = 1.0f; // Speed at which the platform rises up
     public float dropDistance = 2.0f; // Distance the platform drops down
     public float riseDistance = 2.0f; // Distance the platform rises up
+    [SerializeField] private float damage;
 
     private Vector3 initialPosition; // Initial position of the platform
     private bool isDropping = true; // Flag to indicate if the platform is dropping or rising
@@ -44,5 +45,13 @@ public class RockPlatformController : MonoBehaviour
 
         // Apply the new Y position to the platform
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player" || collision.tag == "Player")
+        {
+            collision.GetComponent<Health>().TakeDamage(damage);
+        }
+        
     }
 }
