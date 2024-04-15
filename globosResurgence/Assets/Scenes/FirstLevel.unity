@@ -617,7 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platform: {fileID: 946164949}
   speed: 2
-  distance: 2.42
+  distance: 4
   moveUp: 1
 --- !u!1 &39842594
 GameObject:
