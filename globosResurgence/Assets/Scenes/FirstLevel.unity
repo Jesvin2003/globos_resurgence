@@ -38661,6 +38661,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2682307276933796160, guid: 62c0186878fe41d4e964318d917fd2c3, type: 3}
+      propertyPath: m_text
+      value: Left Click and Drag to aim when throw is active (let go to release/throw)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148932100583584402, guid: 62c0186878fe41d4e964318d917fd2c3, type: 3}
+      propertyPath: m_text
+      value: Left Click to punch with Atmos
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
