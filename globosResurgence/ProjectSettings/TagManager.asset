@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Nimbus
   - Checkpoint
+  - GM
   layers:
   - Default
   - TransparentFX
