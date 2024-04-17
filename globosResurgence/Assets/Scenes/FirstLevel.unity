@@ -10991,7 +10991,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 510236660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b394cc26b8bb6840a78f598ef2cb241, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a2481a52fc2b8547beb2282e45ee02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1078875467}
@@ -16186,6 +16186,14 @@ PrefabInstance:
     - target: {fileID: 7468321488198758338, guid: b26c85d029a908c42baa2c38456cfcf1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701089519996592643, guid: b26c85d029a908c42baa2c38456cfcf1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1261221567}
+    - target: {fileID: 8701089519996592643, guid: b26c85d029a908c42baa2c38456cfcf1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26241,6 +26249,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1261221567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1745828919643083847, guid: 62c0186878fe41d4e964318d917fd2c3, type: 3}
+  m_PrefabInstance: {fileID: 151867041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263256563
 GameObject:
   m_ObjectHideFlags: 0
