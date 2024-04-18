@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Story Intro.unity
     guid: 62e7b7b8d3129154bb2ada09bb1238bc
   - enabled: 1
-    path: Assets/Scenes/FirstLevel.unity
+    path: Assets/Scenes/Shroomwood Forest.unity
     guid: d30fbee988f498842a6e22beea9f1786
   m_configObjects: {}
