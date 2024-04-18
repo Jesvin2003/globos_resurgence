@@ -21,8 +21,8 @@ public class ButtonInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // When player interacts with the button
-        if (other.CompareTag("Player") && !isActivated)
+        // When player or Nimbus interacts with the button
+        if ((other.CompareTag("Player") || other.CompareTag("Nimbus")) && !isActivated)
         {
             isActivated = true; // Set interaction flag to true
             StartCoroutine(MovePlatform()); // Start moving the platform
@@ -94,4 +94,3 @@ public class ButtonInteraction : MonoBehaviour
         isActivated = false; // Reset interaction flag
     }
 }
-

@@ -46,12 +46,33 @@ public class RockPlatformController : MonoBehaviour
         // Apply the new Y position to the platform
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" || collision.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Health>().TakeDamage(damage);
+            Health healthComponent = collision.GetComponent<Health>();
+            Health2 health2Component = collision.GetComponent<Health2>();
+
+            // Check if the Health component exists and take damage
+            if (healthComponent != null)
+            {
+                healthComponent.TakeDamage(damage);
+            }
+            else
+            {
+                Debug.LogWarning("Health component not found on player object: " + collision.gameObject.name);
+            }
+
+            // Check if the Health2 component exists and take damage
+            if (health2Component != null)
+            {
+                health2Component.TakeDamage(damage);
+            }
+            else
+            {
+                Debug.LogWarning("Health2 component not found on player object: " + collision.gameObject.name);
+            }
         }
-        
     }
 }
