@@ -14,13 +14,10 @@ public class Health : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
-        if (currentHealth > 0)
+        if (currentHealth <= 0)
         {
-            // Player is hurt
-        }
-        else
-        {
-            // Player is dead
+            //death
+            Die();
         }
     }
 
@@ -34,10 +31,10 @@ public class Health : MonoBehaviour
         AddHealth(startingHealth);
     }
 
-    private void Update()
+    void Die()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            TakeDamage(1);
+        //death actions, like respawn and animaions
+        Debug.Log("Player has Died");
     }
 }
 

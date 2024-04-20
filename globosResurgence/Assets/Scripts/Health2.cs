@@ -16,19 +16,23 @@ public class Health2 : MonoBehaviour
     {
         currentHealth2 = Mathf.Clamp(currentHealth2 - _damage, 0, startingHealth2);
 
-        if (currentHealth2 > 0)
+        if (currentHealth2 <= 0)
         {
-            //player hurt
+            //player dies, animations, and respawn
+            Die();
         }
-        else
-        {
-            //player dead
-        }
+        
     }
-
+    /*
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
             TakeDamage(1);
+    } */
+
+    void Die()
+    {
+        //Death actions, animation, respawn
+        Debug.Log("Player 2 has Died");
     }
 }
