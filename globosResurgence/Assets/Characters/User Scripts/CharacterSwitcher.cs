@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +9,7 @@ public class CharacterSwitcher : MonoBehaviour
     public GameObject secondaryCharacter;
 
     private PlayerController playerController;
-    private PlayerController aiController; 
+    private PlayerController aiController;
     private CameraFollow cameraFollow;
 
     void Start()

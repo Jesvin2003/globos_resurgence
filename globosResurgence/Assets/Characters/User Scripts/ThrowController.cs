@@ -2,112 +2,103 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//this is my attempt to pick up and throw Nimbus from a ThrowPoint above Atmos head where his arm will hold up to throw
-//Animations and the path of the throw will be implemented later
 public class ThrowController : MonoBehaviour
 {
-    //Variables shown in the unity editor
-    public Transform throwPoint; //above atmos head
+    // Variables shown in the Unity editor
+    public Transform throwPoint; // Above Atmos' head
     public GameObject atmos;
     public GameObject nimbus;
-    //these are all for aiming (force and angle)
+
+    // Variables for aiming (force and angle)
     public float throwForce;
     public float maxForce;
     public float minForce;
     public float throwAngle;
+    public float maxPickupDistance; // Maximum distance for picking up Nimbus
 
     private bool isHoldingNimbus = false;
     private float initialGravityScale;
     private Rigidbody2D nimbusRb;
+    private PlayerController playerController;
 
-    //CameraFollow script in order to get the current target based on character switching
-    private CameraFollow cameraFollow;
-    private Transform target;
-
-    void Start()
+    private void Start()
     {
         nimbusRb = nimbus.GetComponent<Rigidbody2D>();
         initialGravityScale = nimbusRb.gravityScale;
-
-        cameraFollow = FindObjectOfType<CameraFollow>();
+        playerController = atmos.GetComponent<PlayerController>();
     }
 
-    void Update()
+    private void Update()
     {
-        //grab the target from the CameraFollow script
-        target = cameraFollow.CurrentTarget();
-
-        /*debugging
-        if(target != null)
+        if (Input.GetKeyDown(KeyCode.T) && !isHoldingNimbus)
         {
-            Debug.Log("Target found: " + target.name);
-        }
+            float distanceToNimbus = Vector3.Distance(atmos.transform.position, nimbus.transform.position);
 
-        else
-        {
-            Debug.Log("No target found");
-        }
-        */
-
-        //check if the targetis Atmos, if true then allow the user to use T 
-        if(target != null && target.gameObject == atmos)
-        {
-            if (Input.GetKeyDown(KeyCode.T))
+            // Check if Nimbus is within the maximum pickup distance and Atmos is the current target
+            if (distanceToNimbus <= maxPickupDistance && playerController != null && playerController.enabled)
             {
-                if (!isHoldingNimbus)
-                {
-                    //disable the player controller to be able to use keys for soley aiming
-                    PlayerController playerController = atmos.GetComponent<PlayerController>();
+                // Disable the player controller to use keys solely for aiming
+                playerController.enabled = false;
 
-                    if(playerController!= null) 
-                    {
-                        playerController.enabled = false;
-                    }
-
-                    //pick nimbus up
-                    nimbusRb.isKinematic = true;
-                    nimbusRb.gravityScale = 0f; //make him unmovable until he is released
-                    nimbus.transform.SetParent(throwPoint);
-                    nimbus.transform.localPosition = Vector3.zero; //position at throw point
-                    nimbus.transform.localRotation = Quaternion.identity;
-
-                    isHoldingNimbus = true;
-                }
-                //inverse of picking up for the rigidbody
-                else
-                {
-                    //Throw Nimbus
-                    Rigidbody2D rb = nimbus.GetComponent<Rigidbody2D>();
-                    rb.isKinematic = false;
-                    rb.gravityScale = initialGravityScale;
-                    rb.velocity = CalculateThrowVelocity();
-                    isHoldingNimbus = false;
-
-                    //reenable the controller for Atmos
-                    PlayerController playerController = atmos.GetComponent<PlayerController>();
-                    if (playerController != null)
-                        playerController.enabled = true;
-                }
+                // Pick up Nimbus
+                PickUpNimbus();
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.T) && isHoldingNimbus)
+        {
+            // Throw Nimbus
+            ThrowNimbus();
+
+            // Re-enable the controller for Atmos
+            if (playerController != null)
+                playerController.enabled = true;
         }
 
         if (isHoldingNimbus)
         {
-            //adjust the force and angle with WASD
-            if (Input.GetKey(KeyCode.W) && throwForce < maxForce)
-                throwForce += Time.deltaTime;
-            else if(Input.GetKey(KeyCode.S) && throwForce > minForce)
-                throwForce -= Time.deltaTime;
-
-            if (Input.GetKey(KeyCode.A))
-                throwAngle = Mathf.Clamp(throwAngle + Time.deltaTime * 10, 0f, 90f);
-            else if (Input.GetKey(KeyCode.D))
-                throwAngle = Mathf.Clamp(throwAngle - Time.deltaTime * 10, 0f, 90f);
+            // Adjust the force and angle with WASD
+            AdjustAim();
         }
     }
 
-    //caculate velocity, found on unity forums
+    // Pick up Nimbus
+    void PickUpNimbus()
+    {
+        nimbusRb.isKinematic = true;
+        nimbusRb.gravityScale = 0f;
+        nimbus.transform.SetParent(throwPoint);
+        nimbus.transform.localPosition = Vector3.zero;
+        nimbus.transform.localRotation = Quaternion.identity;
 
+        isHoldingNimbus = true;
+    }
+
+    // Throw Nimbus
+    void ThrowNimbus()
+    {
+        Rigidbody2D rb = nimbus.GetComponent<Rigidbody2D>();
+        rb.isKinematic = false;
+        rb.gravityScale = initialGravityScale;
+        rb.velocity = CalculateThrowVelocity();
+
+        isHoldingNimbus = false;
+    }
+
+    // Adjust aim
+    void AdjustAim()
+    {
+        if (Input.GetKey(KeyCode.W) && throwForce < maxForce)
+            throwForce += Time.deltaTime;
+        else if (Input.GetKey(KeyCode.S) && throwForce > minForce)
+            throwForce -= Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.A))
+            throwAngle = Mathf.Clamp(throwAngle + Time.deltaTime * 10, 0f, 90f);
+        else if (Input.GetKey(KeyCode.D))
+            throwAngle = Mathf.Clamp(throwAngle - Time.deltaTime * 10, 0f, 90f);
+    }
+
+    // Calculate velocity
     Vector2 CalculateThrowVelocity()
     {
         float radians = throwAngle * Mathf.Deg2Rad;
@@ -116,4 +107,3 @@ public class ThrowController : MonoBehaviour
         return velocity;
     }
 }
-

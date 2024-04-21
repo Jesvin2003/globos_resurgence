@@ -6578,6 +6578,7 @@ MonoBehaviour:
   maxForce: 15
   minForce: 5
   throwAngle: 45
+  maxPickupDistance: 4
 --- !u!1 &295266476
 GameObject:
   m_ObjectHideFlags: 0
