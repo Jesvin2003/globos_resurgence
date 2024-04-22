@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FlyingMob : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public float speed; // Speed of the flying enemy
     public bool followPlayer = false; // This will trigger the enemy to follow the player if true iff the player is in range
