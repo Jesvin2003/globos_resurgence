@@ -4,10 +4,12 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
+    private GameMaster gameMaster; // Reference to GameMaster script
 
     private void Awake()
     {
         currentHealth = startingHealth;
+        gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
     }
 
     public void TakeDamage(float _damage)
@@ -16,26 +18,14 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            //death
             Die();
         }
     }
 
-    public void AddHealth(float _value)
-    {
-        currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
-    }
-
-    public void Respawn()
-    {
-        AddHealth(startingHealth);
-    }
-
     void Die()
     {
-        //death actions, like respawn and animaions
+        currentHealth = startingHealth; // Reset health
+        transform.position = gameMaster.lastCheckPointPos; // Respawn at last checkpoint
         Debug.Log("Player has Died");
     }
 }
-
-

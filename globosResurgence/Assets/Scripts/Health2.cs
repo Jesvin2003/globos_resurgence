@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Health2 : MonoBehaviour
 {
     [SerializeField] private float startingHealth2;
     public float currentHealth2 { get; private set; }
+    private GameMaster gameMaster; // Reference to GameMaster script
 
     private void Awake()
     {
         currentHealth2 = startingHealth2;
+        gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
     }
 
     public void TakeDamage(float _damage)
@@ -18,21 +18,14 @@ public class Health2 : MonoBehaviour
 
         if (currentHealth2 <= 0)
         {
-            //player dies, animations, and respawn
             Die();
         }
-        
     }
-    /*
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-            TakeDamage(1);
-    } */
 
     void Die()
     {
-        //Death actions, animation, respawn
+        currentHealth2 = startingHealth2; // Reset health
+        transform.position = gameMaster.lastCheckPointPos; // Respawn at last checkpoint
         Debug.Log("Player 2 has Died");
     }
 }
