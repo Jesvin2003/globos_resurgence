@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Title Screen.unity
     guid: 66cbf82fe4830874190be63ed3de1ac8
@@ -17,4 +14,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shroomwood Forest.unity
     guid: d30fbee988f498842a6e22beea9f1786
+  - enabled: 1
+    path: Assets/Scenes/Cave of Divide.unity
+    guid: 87d7b5eefbf8f354bb1bc413d59a88a5
+  - enabled: 1
+    path: Assets/Scenes/Frostwind Valley.unity
+    guid: cd1320bfc1dbac64eb35f7595707a821
+  - enabled: 1
+    path: Assets/Scenes/Sky Light District.unity
+    guid: c61ee1eedbac53244a9363b00b433935
+  - enabled: 1
+    path: Assets/Scenes/Sky Light District/Shooting.unity
+    guid: 4434be566e8aaad4496bb6d223069a36
+  - enabled: 1
+    path: Assets/Scenes/Sky Light District/Strength Test.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Sky Light District/Throw Game.unity
+    guid: 0b67852a664c7a442914a8ff695637fe
+  - enabled: 1
+    path: Assets/Scenes/Final Scene.unity
+    guid: 4eb83a43a03b1824e962322051fa7a6d
+  - enabled: 1
+    path: Assets/Scenes/Blobington.unity
+    guid: 43d6df45b41725b4aa5a4232b7394be8
   m_configObjects: {}

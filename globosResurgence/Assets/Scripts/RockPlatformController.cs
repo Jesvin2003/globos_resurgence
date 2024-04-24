@@ -71,7 +71,7 @@ public class RockPlatformController : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Health2 component not found on player object: " + collision.gameObject.name);
+                //Debug.LogWarning("Health2 component not found on player object: " + collision.gameObject.name);
             }
         }
     }
