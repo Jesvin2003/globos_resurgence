@@ -24,9 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Sky Light District.unity
     guid: c61ee1eedbac53244a9363b00b433935
   - enabled: 1
-    path: Assets/Scenes/Sky Light District/Shooting.unity
-    guid: 4434be566e8aaad4496bb6d223069a36
-  - enabled: 1
     path: Assets/Scenes/Sky Light District/Strength Test.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -35,7 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Final Scene.unity
     guid: 4eb83a43a03b1824e962322051fa7a6d
-  - enabled: 1
-    path: Assets/Scenes/Blobington.unity
-    guid: 43d6df45b41725b4aa5a4232b7394be8
   m_configObjects: {}

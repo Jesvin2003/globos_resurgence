@@ -809,7 +809,9 @@ MonoBehaviour:
   - Atmos and Nimbus
   - On to their final destination
   - The heart of the beast
+  - To be continued...
   textSpeed: 0.005
+  targetSceneIndex: 0
 --- !u!1 &2094533550
 GameObject:
   m_ObjectHideFlags: 0
