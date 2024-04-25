@@ -13,9 +13,7 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         currentHealth = startingHealth;
-
         gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
-
     }
 
     public void TakeDamage(float _damage)
@@ -30,10 +28,7 @@ public class Health : MonoBehaviour
    
         if (currentHealth <= 0)
         {
-
-            //death
             isDead = true;
-
             Die();
         }
 
@@ -41,11 +36,9 @@ public class Health : MonoBehaviour
 
     void Die()
     {
-
         currentHealth = startingHealth; // Reset health
         transform.position = gameMaster.lastCheckPointPos; // Respawn at last checkpoint
         Debug.Log("Player has Died");
-
     }
 
 
