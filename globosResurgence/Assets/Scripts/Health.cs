@@ -13,11 +13,9 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         currentHealth = startingHealth;
-<<<<<<< Updated upstream
+
         gameMaster = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
-=======
-        animator = GetComponent<Animator>();
->>>>>>> Stashed changes
+
     }
 
     public void TakeDamage(float _damage)
@@ -29,14 +27,13 @@ public class Health : MonoBehaviour
         }
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
-        animator.SetTrigger("isTakingDamage");
+   
         if (currentHealth <= 0)
         {
-<<<<<<< Updated upstream
-=======
+
             //death
             isDead = true;
->>>>>>> Stashed changes
+
             Die();
         }
 
@@ -44,15 +41,11 @@ public class Health : MonoBehaviour
 
     void Die()
     {
-<<<<<<< Updated upstream
+
         currentHealth = startingHealth; // Reset health
         transform.position = gameMaster.lastCheckPointPos; // Respawn at last checkpoint
         Debug.Log("Player has Died");
-=======
-         // Set the player as dead
-        animator.SetTrigger("isDead");// Trigger the death animation
-                                           // Optionally, you may want to disable player controls or any other relevant functionality here
->>>>>>> Stashed changes
+
     }
 
 

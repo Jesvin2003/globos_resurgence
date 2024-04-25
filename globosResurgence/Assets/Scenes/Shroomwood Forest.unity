@@ -31894,7 +31894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44e079a81f74774692258f451212236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropSpeed: 10
+  dropSpeed: 6
   riseSpeed: 1
   dropDistance: 2.5
   riseDistance: 5
@@ -44835,7 +44835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44e079a81f74774692258f451212236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropSpeed: 10
+  dropSpeed: 6
   riseSpeed: 1
   dropDistance: 2.5
   riseDistance: 5
