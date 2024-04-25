@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
         }
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
-        animator.SetTrigger("isTakingDamage");
+   
         if (currentHealth <= 0)
         {
             //death
