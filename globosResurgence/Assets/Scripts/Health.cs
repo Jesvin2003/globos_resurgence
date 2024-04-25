@@ -28,6 +28,9 @@ public class Health : MonoBehaviour
         animator.SetTrigger("isTakingDamage");
         if (currentHealth <= 0)
         {
+            //death
+            isDead = true;
+
             Die();
         }
 
