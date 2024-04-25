@@ -13,7 +13,11 @@ public class PlayerController : MonoBehaviour
 
     private float inputX;
     private float vertical;
-    private bool isGrounded;
+    public bool isGrounded;
+    // Jumping, falling, and landing flags
+    public bool isJumping;
+    public bool isFalling;
+    public bool isLanding;
 
     private void Update()
     {
@@ -23,6 +27,34 @@ public class PlayerController : MonoBehaviour
 
         //this is envision with the OnDrawGizmos funtion and can be envisioned in the scene view by manipulating radius in editor
         isGrounded = Physics2D.OverlapCircle(groundChecker.position, checkRadius);
+
+        // Update jump and fall flags based on player's state
+        if (isGrounded && rb.velocity.y == 0f)
+        {
+            isJumping = false;
+            isFalling = false;
+            // If the player was previously falling and is now grounded, set isLanding to true
+            if (isFalling)
+            {
+                isLanding = true;
+            }
+            else
+            {
+                isLanding = false;
+            }
+        }
+        else if (rb.velocity.y > 0f)
+        {
+            isJumping = true;
+            isFalling = false;
+            isLanding = false;
+        }
+        else if (rb.velocity.y < 0f)
+        {
+            isJumping = false;
+            isFalling = true;
+            isLanding = false;
+        }
 
         //this function flips player around when turning direction
         Flip();
